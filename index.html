@@ -1,483 +1,727 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kế Hoạch Thực Tập</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fafaf9;
-            color: #292524;
-        }
-        .tab-btn.active {
-            background-color: #059669;
-            color: white;
-            border-color: #059669;
-        }
-        .role-btn.active {
-            border-bottom: 2px solid #059669;
-            color: #059669;
-            font-weight: bold;
-        }
-        .fade-in {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phân tích Level 1 Data Analyst & Đề xuất chương trình cạnh tranh</title>
+<style>
+:root{
+  --red:#D71920;
+  --red-dark:#A80F15;
+  --red-soft:#FFF1F2;
+  --black:#111111;
+  --ink:#252525;
+  --muted:#666666;
+  --line:#E7E7E7;
+  --soft:#F7F7F7;
+  --white:#FFFFFF;
+  --green:#16794D;
+  --amber:#9A6200;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  line-height:1.62;
+}
+a{color:var(--red-dark);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{width:min(1180px,calc(100% - 40px));margin:0 auto}
+.hero{
+  background:var(--black);
+  color:white;
+  border-top:8px solid var(--red);
+  padding:58px 0 48px;
+}
+.eyebrow{
+  color:#FFB7BA;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:12px;
+  font-weight:800;
+}
+.hero h1{
+  margin:10px 0 14px;
+  max-width:980px;
+  font-size:clamp(34px,5vw,60px);
+  line-height:1.05;
+  letter-spacing:-.035em;
+}
+.hero p{max-width:880px;color:#D6D6D6;font-size:17px;margin:0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.pill{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 11px;border-radius:999px;
+  border:1px solid #3C3C3C;background:#1A1A1A;color:#F4F4F4;
+  font-size:13px;font-weight:700;
+}
+nav{
+  position:sticky;top:0;z-index:20;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(8px);
+}
+.nav-inner{display:flex;gap:6px;overflow:auto;padding:10px 0}
+.nav-inner a{
+  white-space:nowrap;color:#333;font-size:13px;font-weight:750;
+  padding:8px 10px;border-radius:8px;
+}
+.nav-inner a:hover{background:var(--red-soft);color:var(--red-dark);text-decoration:none}
+section{padding:54px 0;border-bottom:1px solid var(--line)}
+.section-head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;margin-bottom:24px}
+.kicker{color:var(--red);font-weight:850;font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+h2{font-size:clamp(27px,3vw,40px);line-height:1.12;margin:5px 0 0;letter-spacing:-.025em;color:var(--black)}
+h3{font-size:20px;line-height:1.25;margin:0 0 8px;color:var(--black)}
+.lead{font-size:17px;color:#4B4B4B;max-width:900px}
+.grid{display:grid;gap:16px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.card{
+  border:1px solid var(--line);border-radius:16px;background:white;padding:20px;
+  box-shadow:0 4px 18px rgba(0,0,0,.03);
+}
+.metric{font-size:32px;line-height:1;font-weight:900;color:var(--black);letter-spacing:-.03em}
+.metric.red{color:var(--red)}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;margin-bottom:10px}
+.small{font-size:13px;color:var(--muted)}
+.callout{
+  background:var(--red-soft);border-left:5px solid var(--red);
+  border-radius:12px;padding:18px 20px;margin:22px 0;
+}
+.callout strong{color:var(--red-dark)}
+.black-callout{
+  background:var(--black);color:white;border-radius:16px;padding:24px;
+}
+.black-callout p{color:#D7D7D7}
+.black-callout strong{color:white}
+table{
+  width:100%;border-collapse:separate;border-spacing:0;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  background:white;font-size:14px;
+}
+th{
+  background:var(--black);color:white;text-align:left;
+  padding:12px 13px;font-size:12px;text-transform:uppercase;letter-spacing:.045em;
+}
+td{padding:13px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr:hover td{background:#FCFCFC}
+td:first-child,th:first-child{white-space:nowrap}
+.badge{
+  display:inline-flex;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:850;
+}
+.badge.explicit{background:#E9F7F0;color:var(--green)}
+.badge.inferred{background:#FFF3D9;color:var(--amber)}
+.badge.red{background:var(--red-soft);color:var(--red-dark)}
+.progress-list{display:grid;gap:12px}
+.progress-row{display:grid;grid-template-columns:160px 1fr 64px;align-items:center;gap:12px}
+.track{height:10px;background:#EFEFEF;border-radius:999px;overflow:hidden}
+.fill{height:100%;background:var(--red);border-radius:999px}
+.compare{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden
+}
+.compare>div{background:white;padding:18px}
+.compare .head{background:var(--black);color:white;font-weight:850}
+.compare .ours{background:var(--red-soft)}
+.checklist{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.checklist li{padding-left:25px;position:relative}
+.checklist li:before{
+  content:"✓";position:absolute;left:0;top:0;color:var(--red);font-weight:900
+}
+.timeline{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:16px
+}
+.sixd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sixd-step{border:1px solid var(--line);border-radius:14px;padding:18px;background:white;position:relative;overflow:hidden}
+.sixd-step .num{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:32px;padding:0 9px;border-radius:8px;background:var(--red);color:white;font-weight:900;font-size:13px;margin-bottom:12px}
+.sixd-step p{margin:6px 0 0;color:#555}
+.framework-flow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:18px 0}
+.framework-flow span{padding:8px 10px;border-radius:9px;background:var(--black);color:white;font-weight:800;font-size:13px}
+.framework-flow b{color:var(--red);font-size:18px}
+.mastery-note{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px}
+.phase{border:1px solid var(--line);border-radius:12px;padding:14px;background:white}
+.phase .mins{font-weight:900;color:var(--red);font-size:18px}
+.session-table td:nth-child(1){font-weight:900;color:var(--red-dark);text-align:center}
+.session-table td:nth-child(2){font-weight:800;color:var(--black)}
+.output{font-weight:700;color:#2C2C2C}
+.module{
+  border-top:4px solid var(--red);
+}
+.module .count{font-size:13px;color:var(--muted);font-weight:750}
+.risk{border-left:4px solid var(--red)}
+.market-card{position:relative;overflow:hidden}
+.market-card:before{
+  content:attr(data-n);position:absolute;right:14px;top:4px;
+  font-size:62px;font-weight:950;color:#F1F1F1;line-height:1
+}
+.market-card h3,.market-card p,.market-card ul{position:relative}
+.cta{
+  display:inline-block;margin-top:8px;padding:8px 11px;border-radius:8px;
+  background:var(--black);color:white;font-size:12px;font-weight:850
+}
+.note{
+  font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:12px;margin-top:14px
+}
+footer{padding:28px 0 50px;color:var(--muted);font-size:13px}
+.source-box{
+  background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:16px 18px
+}
+@media (max-width:900px){
+  .grid-4,.grid-3,.grid-2,.compare{grid-template-columns:1fr}
+  .section-head{grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr 1fr}
+  .sixd-grid{grid-template-columns:1fr 1fr}
+  .progress-row{grid-template-columns:110px 1fr 52px}
+  table{font-size:13px}
+}
+@media (max-width:620px){
+  .container{width:min(100% - 24px,1180px)}
+  .hero{padding:42px 0 34px}
+  section{padding:40px 0}
+  .timeline{grid-template-columns:1fr}
+  .sixd-grid{grid-template-columns:1fr}
+  .table-wrap{overflow:auto}
+  table{min-width:820px}
+}
+@media print{
+  nav{display:none}
+  .hero{padding:28px 0;background:#111!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section{padding:28px 0}
+  .card,table,.phase{break-inside:avoid}
+}
+</style>
 </head>
-<body class="antialiased selection:bg-emerald-200 selection:text-emerald-900">
-    <!-- Chosen Palette: Warm Neutrals & Emerald (Stone-50 background, Stone-800 text, Emerald-600 accent) -->
-    <!-- Application Structure Plan: The SPA is divided into 3 main functional areas to facilitate easy exploration of the 8-week plan. 1. 'Tổng quan Dự án' (Dashboard) uses charts to give a high-level view of team composition and workload distribution. 2. 'Hành trình Theo Tuần' (Interactive Timeline) is the core feature, allowing users to click through weeks to see synchronized cross-functional tasks. This is superior to a linear document as it shows exactly what the whole team is doing at any given time. 3. 'Góc Nhìn Chuyên Môn' (Role-based View) pivots the data, allowing a specific role (BE, FE, QC) to filter out noise and see only their 8-week roadmap. -->
-    <!-- Visualization & Content Choices: 1. Team Size -> Goal: Inform -> Donut Chart (Chart.js) -> Hover interaction -> Shows the imbalance/balance of resources. 2. Sprint Workflow -> Goal: Inform -> Bar Chart (Chart.js) -> Hover interaction -> Shows the steady progression of sprints. 3. Weekly Details -> Goal: Organize/Change -> Interactive Grid with Tab Buttons -> Click interaction -> Allows isolation of complex text data by timeframe. 4. Role Timeline -> Goal: Organize -> Filterable List -> Click interaction -> Allows isolation of data by user persona. ALL charts use Canvas, NO SVG/Mermaid used. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+<body>
 
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl">🥦</span>
-                    <span class="font-bold text-xl text-stone-800 tracking-tight">Dự Án Vegetable Shop</span>
-                </div>
-                <div class="hidden md:flex space-x-4">
-                    <a href="#overview" class="text-stone-500 hover:text-emerald-600 transition-colors">Tổng Quan</a>
-                    <a href="#timeline" class="text-stone-500 hover:text-emerald-600 transition-colors">Theo Tuần</a>
-                    <a href="#roles" class="text-stone-500 hover:text-emerald-600 transition-colors">Theo Vai Trò</a>
-                </div>
-            </div>
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">Báo cáo cạnh tranh • Data Analyst Level 1</div>
+    <h1>Phân tích Level 1 của MindX & khung chương trình cạnh tranh cho lớp tối đa 5 học viên</h1>
+    <p>Báo cáo tập trung vào chương trình Level 1 trong workbook đã nghiên cứu, sau đó chuyển các khoảng trống cạnh tranh thành một syllabus riêng theo triết lý: <strong>học ít hơn mỗi buổi, hiểu sâu hơn, dùng được ngay</strong>.</p>
+    <div class="hero-meta">
+      <span class="pill">Đối thủ: MindX Data Analyst</span>
+      <span class="pill">Lớp đề xuất: ≤ 5 học viên</span>
+      <span class="pill">120 phút / buổi</span>
+      <span class="pill">15 buổi đề xuất • 30 giờ</span>
+      <span class="pill">Không dùng hình minh họa</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="container nav-inner">
+    <a href="#executive">Tóm tắt</a>
+    <a href="#competitor">Level 1 đối thủ</a>
+    <a href="#competition">Phân tích cạnh tranh</a>
+    <a href="#design">Thiết kế khóa riêng</a>
+    <a href="#syllabus">Khung 15 buổi</a>
+    <a href="#mistakes">Lưu ý thị trường</a>
+    <a href="#marketing">Marketing</a>
+    <a href="#sources">Nguồn</a>
+    <a href="#framework">6D Framework</a>
+  </div>
+</nav>
+
+<main>
+<section id="executive">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">01 • Tóm tắt điều hành</div>
+        <h2>Điểm mấu chốt để cạnh tranh</h2>
+      </div>
+    </div>
+    <div class="grid grid-4">
+      <div class="card"><div class="label">MindX Level 1</div><div class="metric">17</div><div class="small">buổi, tính cả Orientation</div></div>
+      <div class="card"><div class="label">Khung iDev đề xuất</div><div class="metric red">15</div><div class="small">buổi × 120 phút = 30 giờ</div></div>
+      <div class="card"><div class="label">Lợi thế vận hành</div><div class="metric">≤ 5</div><div class="small">học viên / lớp để feedback sâu</div></div>
+      <div class="card"><div class="label">Phương pháp</div><div class="metric red">6D</div><div class="small">hiểu để tự quyết định, không học theo mẫu</div></div>
+    </div>
+
+    <div class="callout">
+      <strong>Khuyến nghị định vị:</strong> không cạnh tranh bằng việc “có nhiều tool hơn MindX”. Hãy cạnh tranh bằng <strong>độ chắc nền tảng SQL, khả năng tự kiểm tra dữ liệu, dashboard có logic kinh doanh, AI có kiểm chứng và feedback cá nhân hóa</strong>. iDev 6D Mastery Framework giúp biến lợi thế lớp 5 người thành năng lực thực: Define → Decode → Decide → Detect → Deep Dive → Differentiate.
+    </div>
+
+    <div class="black-callout">
+      <h3>Thông điệp sản phẩm nên nhất quán</h3>
+      <p><strong>“Lớp Data Analyst tối đa 5 người — không chỉ học cách viết SQL và làm dashboard, mà học cách hiểu, lựa chọn, phát hiện lỗi và bảo vệ quyết định phân tích.”</strong></p>
+      <p class="small">Khung 15 buổi không cắt nền tảng cốt lõi. Phần được tinh gọn là các buổi AI/review đứng riêng; AI và review được đưa vào workflow, còn thời lượng được bảo vệ cho SQL, Data Modeling, DAX và Project Defense.</p>
+    </div>
+  </div>
+</section>
+
+<section id="competitor">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">02 • Tổng quan đối thủ</div>
+        <h2>Level 1 MindX đang dạy gì?</h2>
+      </div>
+    </div>
+    <p class="lead">Theo workbook nghiên cứu, Level 1 có tên <strong>“Data for Everyone & Automated Query Assistant”</strong>, đi theo lộ trình query dữ liệu trước, trực quan hóa sau, AI hỗ trợ workflow và kết thúc bằng dự án.</p>
+
+    <div class="grid grid-3" style="margin:22px 0">
+      <div class="card module">
+        <h3>SQL là nền tảng chính</h3>
+        <div class="count">6 buổi core + 1 buổi AI</div>
+        <p>Chiếm tỷ trọng lớn nhất Level 1. Syllabus công khai nêu nhóm câu lệnh, hoàn thiện kỹ thuật truy vấn và tối ưu truy vấn.</p>
+      </div>
+      <div class="card module">
+        <h3>Power BI được nén mạnh</h3>
+        <div class="count">4 buổi core + 1 buổi AI</div>
+        <p>Bao phủ Power Query, modeling, DAX cơ bản, biểu đồ và thiết kế report — phạm vi khá rộng so với số buổi.</p>
+      </div>
+      <div class="card module">
+        <h3>Project là phần lớn cuối khóa</h3>
+        <div class="count">4 buổi Final Project</div>
+        <p>Hướng đến báo cáo descriptive, thuyết trình và có thể xây SQL Assistant — rất thuận lợi để tạo portfolio và truyền thông.</p>
+      </div>
+    </div>
+
+    <h3>Phân bổ thời lượng Level 1</h3>
+    <div class="progress-list" style="margin:16px 0 26px">
+      <div class="progress-row"><span>SQL core</span><div class="track"><div class="fill" style="width:35.3%"></div></div><strong>35.3%</strong></div>
+      <div class="progress-row"><span>Power BI core</span><div class="track"><div class="fill" style="width:23.5%"></div></div><strong>23.5%</strong></div>
+      <div class="progress-row"><span>AI dedicated</span><div class="track"><div class="fill" style="width:11.8%"></div></div><strong>11.8%</strong></div>
+      <div class="progress-row"><span>Project</span><div class="track"><div class="fill" style="width:23.5%"></div></div><strong>23.5%</strong></div>
+      <div class="progress-row"><span>Orientation</span><div class="track"><div class="fill" style="width:5.9%"></div></div><strong>5.9%</strong></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Buổi</th><th>Module</th><th>Nội dung chính</th><th>Output</th><th>Mức độ rõ của output</th><th>Nhận định cạnh tranh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td><td>Orientation</td>
+            <td>Khái niệm dữ liệu, database, cấp độ phân tích, cơ hội nghề nghiệp, cách lưu trữ dữ liệu.</td>
+            <td>Hiểu landscape ngành và cấu trúc dữ liệu.</td>
+            <td><span class="badge inferred">Suy luận từ syllabus</span></td>
+            <td>Phù hợp người mới nhưng dễ thành buổi “nhiều khái niệm, ít thực hành” nếu không có mini case.</td>
+          </tr>
+          <tr>
+            <td>1–6</td><td>SQL</td>
+            <td>Nhóm câu lệnh cơ bản, kỹ thuật truy vấn, tối ưu truy vấn.</td>
+            <td>Truy vấn dữ liệu phục vụ phân tích mô tả.</td>
+            <td><span class="badge inferred">Suy luận từ syllabus</span></td>
+            <td>SQL là trọng tâm nhưng mô tả công khai chưa cho thấy rõ JOIN, CTE, window functions, date/string, data QA.</td>
+          </tr>
+          <tr>
+            <td>7</td><td>SQL + GenAI</td>
+            <td>Dùng GenAI tối ưu truy vấn; xây chatbot/MCP truy vấn dữ liệu.</td>
+            <td><strong>SQL Assistant / chatbot truy vấn dữ liệu.</strong></td>
+            <td><span class="badge explicit">Output rõ</span></td>
+            <td>Outcome dễ marketing. Khoảng trống để vượt: accuracy test, schema grounding, bảo mật, validation.</td>
+          </tr>
+          <tr>
+            <td>8–11</td><td>Power BI</td>
+            <td>Power Query, data modeling, DAX cơ bản, visual design, report.</td>
+            <td>Dashboard/report phân tích mô tả.</td>
+            <td><span class="badge inferred">Khá rõ từ nội dung</span></td>
+            <td>Scope tham vọng trong 4 buổi; rủi ro học viên “làm được theo mẫu” nhưng chưa hiểu model/DAX.</td>
+          </tr>
+          <tr>
+            <td>12</td><td>Power BI + GenAI</td>
+            <td>Dùng GenAI tăng hiệu quả xây dựng báo cáo.</td>
+            <td>Workflow làm report nhanh hơn.</td>
+            <td><span class="badge inferred">Không nêu artifact riêng</span></td>
+            <td>Nên cạnh tranh bằng checklist kiểm chứng số liệu, giải thích DAX và audit trail.</td>
+          </tr>
+          <tr>
+            <td>13–16</td><td>Final Project</td>
+            <td>Làm dự án, báo cáo descriptive, thuyết trình; có thể kết hợp SQL Assistant.</td>
+            <td><strong>Portfolio: descriptive analysis + dashboard + thuyết trình (+ SQL Assistant).</strong></td>
+            <td><span class="badge explicit">Output rõ</span></td>
+            <td>Điểm mạnh lớn của đối thủ. Muốn vượt cần rubric: problem → data QA → analysis → insight → recommendation → defense.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <strong>Kết luận về đối thủ:</strong> cấu trúc tổng thể là hợp lý cho người mới. Điểm mạnh không nằm ở từng chủ đề riêng lẻ mà ở việc ghép <strong>AI + project + portfolio</strong> vào hành trình. Khoảng trống cạnh tranh tốt nhất nằm ở <strong>độ sâu SQL, data modeling/DAX, data quality, storytelling và chất lượng kiểm chứng output AI</strong>.
+    </div>
+  </div>
+</section>
+
+<section id="competition">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">03 • Phân tích cạnh tranh</div>
+        <h2>Nếu bạn mở khóa có khung tương tự, nên match gì và vượt ở đâu?</h2>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="head">Hạng mục</div><div class="head">MindX công khai</div><div class="head">Thiết kế nên dùng để cạnh tranh</div>
+
+      <div><strong>SQL</strong></div>
+      <div>6 buổi core, mô tả topic tương đối khái quát.</div>
+      <div class="ours"><strong>Dạy theo task nghề nghiệp:</strong> JOIN, CTE, window, date/string, NULL, data QA, query review; mỗi buổi có bài độc lập.</div>
+
+      <div><strong>Power BI</strong></div>
+      <div>4 buổi core bao phủ ETL + model + DAX + visualization.</div>
+      <div class="ours"><strong>Giảm tốc:</strong> model trước dashboard; measures trước “trang trí”; học viên phải giải thích được filter context.</div>
+
+      <div><strong>AI</strong></div>
+      <div>AI hỗ trợ SQL, Power BI; có SQL Assistant.</div>
+      <div class="ours"><strong>AI có kiểm chứng:</strong> AI chỉ được chấp nhận khi học viên kiểm tra query, số liệu, edge case và giải thích được kết quả.</div>
+
+      <div><strong>Project</strong></div>
+      <div>4 buổi cuối kỳ, sản phẩm dễ làm portfolio.</div>
+      <div class="ours"><strong>Project 3 buổi nhưng chặt:</strong> một business question, dữ liệu vừa đủ messy, rubric 6D minh bạch, review 1:1 và buổi Defense cuối khóa.</div>
+
+      <div><strong>Hỗ trợ học</strong></div>
+      <div>Mentor nhóm nhỏ 10–15 học viên.</div>
+      <div class="ours"><strong>≤ 5 học viên:</strong> mỗi người có thời lượng code review/dash review trực tiếp; theo dõi lỗi cá nhân qua skill checklist.</div>
+
+      <div><strong>Đầu vào</strong></div>
+      <div>Không yêu cầu IT background.</div>
+      <div class="ours"><strong>Chuẩn hóa ngay buổi 1:</strong> người mới và người biết sơ SQL có task khác nhau trong 35 phút, sau đó hợp dòng để buổi 2 học chung.</div>
+
+      <div><strong>Phương pháp học</strong></div>
+      <div>Syllabus công khai tập trung vào nội dung, tool, AI và project.</div>
+      <div class="ours"><strong>iDev 6D Mastery:</strong> mỗi kỹ thuật đi qua Define → Decode → Decide → Detect → Deep Dive → Differentiate, ở độ sâu phù hợp Level 1.</div>
+
+      <div><strong>Outcome</strong></div>
+      <div>Dashboard/report, SQL Assistant, project.</div>
+      <div class="ours"><strong>Outcome đo được:</strong> query pack + dashboard + insight memo + 6D project defense + checklist năng lực.</div>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:22px">
+      <div class="card">
+        <div class="label">USP 1</div>
+        <h3>“5 học viên” phải thành dịch vụ thật</h3>
+        <p>Mỗi buổi giảng viên cần xem trực tiếp bài của từng người, không chỉ hỏi “có hiểu không”. Nên có log lỗi cá nhân và điểm cần sửa cho buổi sau.</p>
+      </div>
+      <div class="card">
+        <div class="label">USP 2</div>
+        <h3>Mastery trước tốc độ</h3>
+        <p>Không mở topic mới nếu phần lớn lớp chưa hoàn thành exit ticket. Với lớp 5 người, điều chỉnh tốc độ theo thực tế là lợi thế mà lớp lớn khó làm.</p>
+      </div>
+      <div class="card">
+        <div class="label">USP 3</div>
+        <h3>AI-native nhưng không lệ thuộc AI</h3>
+        <p>Học viên phải tự đọc và kiểm tra query/DAX trước khi dùng AI để tăng tốc. Đây là khác biệt quan trọng về chất lượng đầu ra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="design">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">04 • Thiết kế chương trình riêng</div>
+        <h2>Nguyên tắc dành cho lớp tối đa 5 học viên</h2>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Mục tiêu đầu ra Level 1</h3>
+        <ul class="checklist">
+          <li>Tự viết SQL để trả lời các câu hỏi phân tích phổ biến.</li>
+          <li>Biết JOIN, CTE/subquery, window, date/string, NULL và kiểm tra chất lượng dữ liệu.</li>
+          <li>Tự biến raw data thành model Power BI đơn giản, đúng quan hệ.</li>
+          <li>Viết measure DAX cơ bản và giải thích được logic/filter context ở mức Level 1.</li>
+          <li>Thiết kế dashboard gọn, trả lời business question, không chỉ “đẹp”.</li>
+          <li>Dùng GenAI hỗ trợ SQL/BI nhưng biết kiểm chứng output và nhận diện rủi ro.</li>
+          <li>Hoàn thành mini project và bảo vệ quyết định phân tích qua 6D Defense.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Cơ chế đảm bảo “học đến đâu dùng được đến đó”</h3>
+        <ul class="checklist">
+          <li>Mỗi buổi chỉ có 1–2 năng lực mới cốt lõi; ưu tiên Must Know trước Should/Nice to Know.</li>
+          <li>Mỗi kỹ thuật được nhìn qua các câu hỏi 6D, không chỉ học syntax hoặc thao tác tool.</li>
+          <li>Mastery Lab + bài độc lập chiếm phần thời lượng lớn nhất để kiểm tra năng lực thật.</li>
+          <li>Mỗi buổi có output nhỏ và exit ticket; sai ở đâu sửa trước khi tăng độ khó.</li>
+          <li>Bài tập về nhà ngắn, ưu tiên 30–45 phút và dùng chính dataset của buổi học.</li>
+          <li>Review cá nhân theo lỗi thật; mỗi học viên có log Define/Decode/Decide/Detect/Deep Dive/Differentiate.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px">Nhịp chuẩn cho một buổi 120 phút theo iDev 6D</h3>
+    <div class="timeline">
+      <div class="phase"><div class="mins">10'</div><strong>Recall & Problem</strong><div class="small">ôn nhanh + đặt bài toán thực tế</div></div>
+      <div class="phase"><div class="mins">10'</div><strong>Define</strong><div class="small">khái niệm, phạm vi, nền tảng chuẩn</div></div>
+      <div class="phase"><div class="mins">10'</div><strong>Decode</strong><div class="small">giải mã cơ chế hoạt động thật sự</div></div>
+      <div class="phase"><div class="mins">10'</div><strong>Decide</strong><div class="small">chọn công cụ/cách làm cho tình huống</div></div>
+      <div class="phase"><div class="mins">10'</div><strong>Detect</strong><div class="small">tìm lỗi, rủi ro và anti-pattern</div></div>
+      <div class="phase"><div class="mins">10'</div><strong>Deep Dive + Differentiate</strong><div class="small">trade-off, so sánh và giới hạn sử dụng</div></div>
+      <div class="phase"><div class="mins">40'</div><strong>Mastery Lab</strong><div class="small">guided → independent practice</div></div>
+      <div class="phase"><div class="mins">15'</div><strong>Review & Discussion</strong><div class="small">xem bài từng học viên, hỏi “vì sao”</div></div>
+      <div class="phase"><div class="mins">5'</div><strong>Exit Ticket</strong><div class="small">xác nhận đã hiểu và dùng được</div></div>
+    </div>
+
+    <div class="callout">
+      <strong>6D không có nghĩa là 6 phần lecture.</strong> Một số bước có thể được nhúng vào demo, bài tập hoặc phần chữa bài. Mục tiêu là học viên phải trải qua đủ sáu kiểu tư duy, không phải giảng viên nói liên tục về sáu mục.
+    </div>
+
+    <div class="callout">
+      <strong>Riêng Buổi 1 để chuẩn hóa đầu vào:</strong> 10' đặt mục tiêu → 20' diagnostic → 30' chia 2 track (người mới học cú pháp nền; người biết sơ SQL làm gap-finding) → 25' Define + Decode nền tảng chung → 20' shared mastery lab → 10' review cá nhân → 5' exit ticket. <strong>Từ Buổi 2 học cùng syllabus; học viên biết trước SQL nhận challenge nâng cao thay vì học topic khác.</strong>
+    </div>
+  </div>
+</section>
+
+<section id="syllabus">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">05 • Syllabus đề xuất</div>
+        <h2>Khung Level 1 — 15 buổi × 120 phút</h2>
+      </div>
+      <div class="badge red">Tổng 30 giờ học trực tiếp</div>
+    </div>
+    <p class="lead">Khung mới giữ toàn bộ nền tảng cần thiết nhưng tinh gọn các buổi AI/review đứng riêng. Cấu trúc là <strong>8 buổi SQL Mastery → 4 buổi Power BI Mastery → 3 buổi Mini Project</strong>; GenAI và review được tích hợp vào workflow, còn iDev 6D được dùng như khung tư duy xuyên suốt.</p>
+
+    <div class="grid grid-3" style="margin:22px 0">
+      <div class="card module"><h3>SQL Mastery</h3><div class="count">Buổi 1–8</div><p>Nền tảng → JOIN/CTE/Data QA → Window → SQL Mastery Case + GenAI Validation.</p></div>
+      <div class="card module"><h3>Power BI Mastery</h3><div class="count">Buổi 9–12</div><p>Power Query → Data Modeling → DAX → Dashboard Storytelling & End-to-End BI Case.</p></div>
+      <div class="card module"><h3>Mini Project + Defense</h3><div class="count">Buổi 13–15</div><p>Framing → build → insight → presentation, kết thúc bằng 6D Defense để kiểm tra năng lực thật.</p></div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="session-table">
+        <thead>
+          <tr>
+            <th>Buổi</th><th>Chủ đề</th><th>Trọng tâm kiến thức</th><th>Trọng tâm 6D</th><th>Output sau buổi</th><th>Điều kiện để đi tiếp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Leveling + Data Thinking + SQL Bridge</td><td>Diagnostic; database/table/row/column; SELECT/FROM/WHERE cơ bản; hai track đầu vào rồi hợp lớp.</td><td><span class="badge red">Define · Decode</span></td><td class="output">Mini query pack + bản đồ lỗi/năng lực cá nhân.</td><td>Làm được query nền và giải thích được dữ liệu đang nằm ở grain nào.</td></tr>
+          <tr><td>2</td><td>SELECT, WHERE & CASE</td><td>Lọc, điều kiện, sắp xếp, CASE WHEN; chuyển business rule thành logic SQL.</td><td><span class="badge red">Define · Decode · Decide</span></td><td class="output">Bảng phân nhóm khách hàng theo business rule.</td><td>Tự chuyển yêu cầu bằng ngôn ngữ tự nhiên thành điều kiện SQL.</td></tr>
+          <tr><td>3</td><td>Aggregation & KPI Thinking</td><td>COUNT/SUM/AVG, GROUP BY, HAVING; grain; tử số/mẫu số; KPI cơ bản.</td><td><span class="badge red">Decode · Decide · Detect</span></td><td class="output">Bộ 5 KPI + kiểm tra grain và sanity check.</td><td>Không nhầm WHERE/HAVING và giải thích được KPI đang đo điều gì.</td></tr>
+          <tr><td>4</td><td>JOIN, Keys & Grain</td><td>INNER/LEFT JOIN; key; one-to-many; duplicate; row multiplication; kiểm tra trước/sau JOIN.</td><td><span class="badge red">Full 6D</span></td><td class="output">Dataset customer-order chuẩn + JOIN validation checklist.</td><td>Phát hiện được JOIN sai và chứng minh bằng row count/KPI đối chiếu.</td></tr>
+          <tr><td>5</td><td>CTE & Subquery</td><td>Chia query thành bước; CTE; subquery; readability; khi nào nên tách logic.</td><td><span class="badge red">Decide · Deep Dive · Differentiate</span></td><td class="output">Query nhiều bước cho funnel/case đơn giản.</td><td>Giải thích được vì sao chọn CTE hoặc subquery thay vì viết query dài.</td></tr>
+          <tr><td>6</td><td>Date, String, NULL & Data Quality</td><td>Xử lý ngày/tháng, text, NULL; missing/duplicate; sanity checks; data QA trước phân tích.</td><td><span class="badge red">Detect · Decide</span></td><td class="output">Data Quality Report bằng SQL cho dataset nhỏ.</td><td>Tự thiết kế ít nhất 4 data checks và biết lỗi nào ảnh hưởng KPI.</td></tr>
+          <tr><td>7</td><td>Window Functions</td><td>ROW_NUMBER, RANK, aggregate OVER(PARTITION BY...); khác biệt với GROUP BY; giới hạn phạm vi Level 1.</td><td><span class="badge red">Full 6D</span></td><td class="output">Top-N theo nhóm + running/partition aggregate.</td><td>Giải thích được khi nào dùng GROUP BY và khi nào dùng window.</td></tr>
+          <tr><td>8</td><td>SQL Mastery Case + GenAI Validation</td><td>Business question → schema → query plan → SQL → validation; dùng AI để explain/refactor/gợi ý nhưng phải test.</td><td><span class="badge red">Full 6D Integration</span></td><td class="output">SQL case pack + AI validation checklist + ground-truth checks.</td><td>Đạt rubric về logic, readability, validation và tự bảo vệ được lựa chọn query.</td></tr>
+          <tr><td>9</td><td>Power Query & Data Preparation</td><td>Import, type, clean, merge/append cơ bản; reproducible transformation; tư duy ETL nhẹ.</td><td><span class="badge red">Define · Decide · Detect</span></td><td class="output">Dataset sạch, refresh được từ raw file.</td><td>Transformation có logic rõ, không sửa số liệu thủ công trên visual.</td></tr>
+          <tr><td>10</td><td>Data Modeling</td><td>Fact/dimension, star schema, relationship, cardinality, filter direction; flat vs star schema.</td><td><span class="badge red">Full 6D</span></td><td class="output">Model 1 fact + dimensions, có giải thích relationship.</td><td>Giải thích được vì sao model đúng và nhận diện được relationship/duplicate key có vấn đề.</td></tr>
+          <tr><td>11</td><td>DAX Measures & Context</td><td>Measure vs calculated column; SUM, COUNTROWS, DIVIDE; filter context; kiểm chứng KPI bằng SQL/sample.</td><td><span class="badge red">Decode · Detect · Deep Dive</span></td><td class="output">Bộ 6–8 measures + bảng reconciliation với SQL.</td><td>Measure cho kết quả đúng và học viên giải thích được context ở mức thực dụng.</td></tr>
+          <tr><td>12</td><td>Dashboard Storytelling + End-to-End BI Case + GenAI</td><td>Chọn chart, hierarchy, layout, tooltip; raw data → QA → KPI → model → dashboard → insight; AI hỗ trợ critique/DAX/text nhưng bắt buộc audit.</td><td><span class="badge red">Decide · Detect · Differentiate</span></td><td class="output">Dashboard 1 trang + executive summary + audit checklist.</td><td>Mỗi visual trả lời một câu hỏi; KPI khớp nguồn; học viên bảo vệ được lựa chọn chart/measure.</td></tr>
+          <tr><td>13</td><td>Mini Project — Framing + Data QA + SQL</td><td>Business question; KPI tree; scope; data QA; SQL analysis; pre-work đọc dataset/data dictionary trước buổi.</td><td><span class="badge red">Define · Decide · Detect</span></td><td class="output">Project brief + QA checklist + SQL v1.</td><td>Giảng viên duyệt scope, KPI và logic SQL trước khi build BI.</td></tr>
+          <tr><td>14</td><td>Mini Project — Model + DAX + Dashboard Review</td><td>Model, measures, dashboard; review 1:1; so sánh phương án thiết kế và sửa anti-pattern.</td><td><span class="badge red">Decode · Deep Dive · Differentiate</span></td><td class="output">Power BI model + dashboard v1 + review notes.</td><td>Không còn lỗi logic nghiêm trọng; số liệu đối chiếu được; dashboard có hierarchy rõ.</td></tr>
+          <tr><td>15</td><td>Insight + Presentation + 6D Defense</td><td>Insight, recommendation, trình bày 8–10 phút/người, Q&A theo Define/Decode/Decide/Detect/Deep Dive/Differentiate.</td><td><span class="badge red">Full 6D Defense</span></td><td class="output">Portfolio bundle: SQL + PBIX + insight memo + rubric 6D.</td><td>Học viên giải thích và bảo vệ được quyết định phân tích mà không phụ thuộc AI.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid grid-3" style="margin-top:22px">
+      <div class="card"><div class="label">8 buổi SQL</div><h3>Giữ độ sâu thay vì cắt nền</h3><p>Không cắt JOIN, CTE, Data Quality hay Window. Buổi 8 là SQL Mastery Checkpoint thay vì một buổi AI riêng.</p></div>
+      <div class="card"><div class="label">4 buổi Power BI</div><h3>Model trước visual</h3><p>Power Query → Modeling → DAX → Storytelling. AI được nhúng vào workflow nhưng kết quả phải reconciliation/audit.</p></div>
+      <div class="card"><div class="label">3 buổi Project</div><h3>Project nhỏ, Defense sâu</h3><p>Scope vừa sức người mới, có pre-work và checkpoint để tiết kiệm thời gian; chất lượng được đo bằng khả năng giải thích theo 6D.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="mistakes">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">06 • Lưu ý vận hành</div>
+        <h2>Những sai lầm phổ biến trên thị trường nên tránh</h2>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card risk">
+        <h3>1. Nhồi quá nhiều tool để syllabus “trông nhiều”</h3>
+        <p>Level 1 không cần Python, cloud hay quá nhiều AI agent nếu SQL/BI chưa chắc. Danh sách tool dài làm tăng cảm giác giá trị nhưng dễ giảm năng lực thực hành.</p>
+      </div>
+      <div class="card risk">
+        <h3>2. Học viên làm theo giảng viên nhưng không tự làm được</h3>
+        <p>Mỗi buổi phải có 15–25 phút bài độc lập không nhìn mẫu. Nếu chỉ live-code và copy, cảm giác hiểu sẽ cao hơn năng lực thật.</p>
+      </div>
+      <div class="card risk">
+        <h3>3. Dùng AI quá sớm để che lỗ hổng nền tảng</h3>
+        <p>AI nên vào sau khi học viên biết đọc query/DAX. Chấm cả khả năng phát hiện output AI sai, không chỉ tốc độ hoàn thành.</p>
+      </div>
+      <div class="card risk">
+        <h3>4. Dashboard đẹp nhưng sai số hoặc sai grain</h3>
+        <p>Bắt buộc có reconciliation: một vài KPI trên Power BI phải đối chiếu với SQL hoặc manual check trên sample.</p>
+      </div>
+      <div class="card risk">
+        <h3>5. Project quá lớn khiến học viên “mượn bài”</h3>
+        <p>Với người mới, project nhỏ, scope chặt và review theo từng checkpoint giúp phản ánh năng lực thật hơn capstone quá hoành tráng.</p>
+      </div>
+      <div class="card risk">
+        <h3>6. Không chuẩn hóa đầu vào</h3>
+        <p>Lớp ít người vẫn có thể lệch trình độ. Buổi 1 cần diagnostic + task phân nhánh, và từ buổi 2 dùng cùng một chuẩn năng lực.</p>
+      </div>
+      <div class="card risk">
+        <h3>7. Quảng cáo outcome nghề nghiệp quá mức</h3>
+        <p>Không nên hứa “học xong có việc”. Hãy cam kết những thứ kiểm soát được: syllabus, feedback, rubric, số lần review và artifact đầu ra.</p>
+      </div>
+      <div class="card risk">
+        <h3>8. “Lớp 5 người” nhưng trải nghiệm vẫn như lớp 20</h3>
+        <p>Nếu không có review cá nhân, sửa bài và theo dõi lỗi từng người, quy mô nhỏ chỉ là slogan và khó bảo vệ mức giá premium.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="marketing">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">07 • Marketing</div>
+        <h2>4 phương án quảng cáo trên fanpage & hội nhóm</h2>
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card market-card" data-n="01">
+        <div class="label">Phương án 1 • USP lớp nhỏ</div>
+        <h3>“Không mở lớp thứ 6”</h3>
+        <p><strong>Hook:</strong> “Một lớp Data Analyst chỉ nhận tối đa 5 người vì mỗi buổi giảng viên phải xem bài từng học viên.”</p>
+        <ul>
+          <li><strong>Fanpage:</strong> chuỗi post giải thích 5 quyền lợi cụ thể của lớp 5 người: code review, dashboard review, log lỗi, checkpoint, defense.</li>
+          <li><strong>Hội nhóm:</strong> chia sẻ bài “vì sao học SQL đông người dễ mắc kẹt ở JOIN/CTE” rồi mới nhắc lớp ở cuối.</li>
+          <li><strong>Lead magnet:</strong> checklist “7 lỗi SQL người mới hay mắc”.</li>
+          <li><strong>CTA:</strong> đăng ký test đầu vào 15 phút.</li>
+        </ul>
+        <span class="cta">Mục tiêu: tạo khác biệt rõ với lớp đông</span>
+      </div>
+
+      <div class="card market-card" data-n="02">
+        <div class="label">Phương án 2 • Diagnostic funnel</div>
+        <h3>“Bạn đang ở đâu trên bản đồ SQL?”</h3>
+        <p><strong>Hook:</strong> bài test 10 câu chia 3 mức: chưa học / biết cơ bản / đã dùng nhưng chưa chắc.</p>
+        <ul>
+          <li><strong>Fanpage:</strong> carousel text hoặc post dài công bố 3 profile lỗi thường gặp và lộ trình sửa.</li>
+          <li><strong>Hội nhóm:</strong> đăng mini challenge 3 câu SQL có đáp án giải thích; tránh đăng bán hàng ngay từ đầu.</li>
+          <li><strong>Chuyển đổi:</strong> gửi kết quả + 1 trang learning plan cá nhân.</li>
+          <li><strong>CTA:</strong> mời vào lớp demo/clinic ngắn hoặc danh sách chờ cohort.</li>
+        </ul>
+        <span class="cta">Mục tiêu: thu lead có nhu cầu thật</span>
+      </div>
+
+      <div class="card market-card" data-n="03">
+        <div class="label">Phương án 3 • Project-first</div>
+        <h3>“15 buổi để đi từ raw data đến quyết định phân tích có thể bảo vệ”</h3>
+        <p><strong>Hook:</strong> không khoe syllabus dài; khoe chuỗi output học viên sẽ tạo ra theo từng mốc.</p>
+        <ul>
+          <li><strong>Fanpage:</strong> 4 post: SQL Mastery → data QA → dashboard → 6D Defense.</li>
+          <li><strong>Hội nhóm:</strong> bài teardown một dashboard mẫu: chỗ nào nhìn đẹp nhưng sai logic/KPI.</li>
+          <li><strong>Proof:</strong> khi có cohort đầu, dùng ảnh chụp output đã ẩn dữ liệu cá nhân và trích rubric.</li>
+          <li><strong>CTA:</strong> nhận đề bài mini project mẫu + rubric 6D.</li>
+        </ul>
+        <span class="cta">Mục tiêu: bán outcome thay vì bán tool</span>
+      </div>
+
+      <div class="card market-card" data-n="04">
+        <div class="label">Phương án 4 • Anti-bloat content</div>
+        <h3>“Học ít hơn mỗi buổi, nhưng tự làm được”</h3>
+        <p><strong>Hook:</strong> phản biện nhẹ xu hướng khóa Data nhồi SQL + BI + Python + AI trong thời gian ngắn.</p>
+        <ul>
+          <li><strong>Fanpage:</strong> series “1 kỹ năng / 1 lỗi / 1 bài sửa” về JOIN, grain, DAX, AI hallucination.</li>
+          <li><strong>Hội nhóm:</strong> content giáo dục có ví dụ thật, không công kích trung tâm khác và không so sánh thiếu bằng chứng.</li>
+          <li><strong>Thông điệp:</strong> “không chạy theo số lượng tool; đo bằng việc bạn tự giải được bài.”</li>
+          <li><strong>CTA:</strong> tải syllabus chi tiết có output từng buổi.</li>
+        </ul>
+        <span class="cta">Mục tiêu: xây niềm tin & định vị chuyên môn</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Gợi ý thứ tự triển khai:</strong> bắt đầu bằng Phương án 2 để thu lead và hiểu pain point thật → dùng dữ liệu đó viết content Phương án 4 → khi đã có artifact/cohort đầu, đẩy Phương án 3 → Phương án 1 luôn chạy như USP xuyên suốt. Trong hội nhóm, ưu tiên bài có giá trị học tập trước CTA để tránh bị xem là spam.
+    </div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">08 • Nguồn & phạm vi</div>
+        <h2>Cách đọc báo cáo</h2>
+      </div>
+    </div>
+    <div class="source-box">
+      <p><strong>Nguồn chính trong workbook:</strong> <a href="https://mindx.edu.vn/course/khoa-hoc-data-analyst">Trang khóa học Data Analyst của MindX</a>, truy cập trong báo cáo gốc ngày 11/08/2026.</p>
+      <p><strong>Lưu ý:</strong> phân tích này dựa trên syllabus/marketing copy công khai, không phải quan sát lớp học thực tế. Các output được gắn nhãn <span class="badge explicit">Output rõ</span> khi trang công khai mô tả sản phẩm tương đối cụ thể; các output khác là suy luận hợp lý từ nội dung syllabus và đã được đánh dấu.</p>
+      <p><strong>Không sử dụng trong báo cáo này:</strong> Level 2–4, học phí chính xác, completion rate, NPS và chất lượng giảng viên vì không thuộc phạm vi yêu cầu hoặc chưa được xác minh độc lập.</p>
+    </div>
+  </div>
+</section>
+
+<section id="framework">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="kicker">09 • iDev 6D Mastery Framework</div>
+        <h2>Không học “nhớ để làm theo” — học “hiểu để tự quyết định”</h2>
+      </div>
+    </div>
+    <p class="lead">6D là khung tư duy iDev dùng để dẫn dắt mỗi khái niệm kỹ thuật từ nền tảng đến khả năng tự lựa chọn và tự kiểm chứng. Với Data Analyst Level 1, độ sâu của từng chữ D được giới hạn phù hợp beginner; mục tiêu không phải biến nội dung thành advanced, mà biến kiến thức cơ bản thành năng lực sử dụng có chủ đích.</p>
+
+    <div class="framework-flow">
+      <span>01 Define</span><b>→</b><span>02 Decode</span><b>→</b><span>03 Decide</span><b>→</b><span>04 Detect</span><b>→</b><span>05 Deep Dive</span><b>→</b><span>06 Differentiate</span>
+    </div>
+
+    <div class="sixd-grid">
+      <div class="sixd-step"><div class="num">01</div><h3>Define</h3><p>Xây nền lý thuyết chuẩn — hiểu đúng bản chất trước khi bắt tay viết query, DAX hoặc kéo visual.</p></div>
+      <div class="sixd-step"><div class="num">02</div><h3>Decode</h3><p>Giải mã cơ chế hoạt động thật sự bên trong — không dừng ở việc “nhớ chạy được”.</p></div>
+      <div class="sixd-step"><div class="num">03</div><h3>Decide</h3><p>Chọn đúng công cụ và cách tiếp cận cho bài toán cụ thể, thay vì áp dụng một công thức cho mọi tình huống.</p></div>
+      <div class="sixd-step"><div class="num">04</div><h3>Detect</h3><p>Nhận diện rủi ro, lỗi dữ liệu và anti-pattern trước khi chúng biến thành KPI hoặc dashboard sai.</p></div>
+      <div class="sixd-step"><div class="num">05</div><h3>Deep Dive</h3><p>Phân tích ưu/nhược điểm, trade-off và ảnh hưởng của các phương án ở độ sâu vừa đủ cho Level 1.</p></div>
+      <div class="sixd-step"><div class="num">06</div><h3>Differentiate</h3><p>So sánh đa chiều để biết khi nào nên dùng và khi nào không nên dùng một kỹ thuật.</p></div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:20px">
+      <div class="card">
+        <h3>Ví dụ 6D với JOIN</h3>
+        <ul class="checklist">
+          <li><strong>Define:</strong> JOIN, key và grain là gì?</li>
+          <li><strong>Decode:</strong> Vì sao JOIN có thể làm tăng số dòng?</li>
+          <li><strong>Decide:</strong> Khi nào dùng INNER hay LEFT JOIN?</li>
+          <li><strong>Detect:</strong> Làm sao phát hiện duplicate/many-to-many làm sai KPI?</li>
+          <li><strong>Deep Dive:</strong> Aggregate trước hay JOIN trước tạo trade-off gì?</li>
+          <li><strong>Differentiate:</strong> Khi nào nên JOIN trực tiếp, khi nào nên tách logic qua CTE/subquery?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>6D được đánh giá thế nào?</h3>
+        <p>Với lớp tối đa 5 người, giảng viên có thể theo dõi từng học viên theo sáu chiều thay vì chỉ chấm “query chạy đúng hay sai”. Cuối khóa, Project Defense dùng câu hỏi 6D để kiểm tra khả năng giải thích và tự bảo vệ quyết định phân tích.</p>
+        <div class="table-wrap" style="margin-top:12px">
+          <table>
+            <thead><tr><th>Dimension</th><th>Chưa đạt</th><th>Đạt</th><th>Tốt</th></tr></thead>
+            <tbody>
+              <tr><td>Define</td><td>Chưa mô tả đúng</td><td>Hiểu khái niệm</td><td>Giải thích rõ bằng ví dụ</td></tr>
+              <tr><td>Decode</td><td>Chỉ làm theo mẫu</td><td>Hiểu cơ chế chính</td><td>Giải thích được dữ liệu chạy thế nào</td></tr>
+              <tr><td>Decide</td><td>Chọn theo thói quen</td><td>Chọn đúng cách</td><td>Nêu được lý do/trade-off</td></tr>
+              <tr><td>Detect</td><td>Bỏ sót lỗi</td><td>Tìm lỗi phổ biến</td><td>Chủ động thiết kế validation</td></tr>
+              <tr><td>Deep Dive</td><td>Không thấy trade-off</td><td>So sánh được 2 cách</td><td>Phân tích ảnh hưởng thực tế</td></tr>
+              <tr><td>Differentiate</td><td>Áp dụng máy móc</td><td>Biết khi nào dùng</td><td>Biết cả khi nào không nên dùng</td></tr>
+            </tbody>
+          </table>
         </div>
-    </nav>
+      </div>
+    </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-        
-        <header class="text-center max-w-3xl mx-auto space-y-4">
-            <h1 class="text-4xl font-extrabold text-stone-900 tracking-tight">Plan: Thực Tập 8 Tuần</h1>
-            <p class="text-lg text-stone-600">Ứng dụng Webapp Cửa hàng Rau củ quả. Làm việc theo mô hình Agile/Scrum (1 Tuần = 1 Sprint) với phương pháp tiếp cận API-First Design.</p>
-            <div class="flex justify-center gap-4 text-sm font-medium">
-                <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">👥 Team: 7 Người</span>
-                <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full">⏱ Timeline: 8 Tuần</span>
-                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">🚀 Phương pháp: API-First</span>
-            </div>
-        </header>
+    <div class="mastery-note">
+      <strong>Nguyên tắc áp dụng trong Level 1:</strong> 6D là framework tư duy, không phải sáu lecture bắt buộc cho mọi chủ đề. Những chủ đề nền như SELECT có thể ưu tiên Define/Decode/Decide; các chủ đề dễ gây lỗi như JOIN, Data Modeling và Window Functions được đi gần đủ 6D; còn buổi SQL Mastery Case và Project Defense dùng Full 6D để kiểm tra năng lực tổng hợp.
+    </div>
+  </div>
+</section>
+</main>
 
-        <section id="overview" class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 md:p-8 scroll-mt-20">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-stone-800 mb-2">📊 Tổng Quan Nguồn Lực</h2>
-                <p class="text-stone-600">Phần này cung cấp thông tin chi tiết về danh sách thành viên và vai trò cụ thể của từng bộ phận trong dự án Vegetable Shop.</p>
-            </div>
+<footer>
+  <div class="container">
+    Báo cáo HTML tập trung Level 1, gồm phân tích đối thủ và khung iDev 15 buổi × 120 phút áp dụng 6D Mastery Framework. Thiết kế sử dụng tông Đỏ – Đen – Trắng, tối ưu để đọc trên desktop/mobile và có thể in.
+  </div>
+</footer>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <!-- Backend Card -->
-                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-5 py-4">
-                        <h4 class="font-bold text-white flex items-center gap-2 text-lg">⚙️ Backend (BE)</h4>
-                    </div>
-                    <div class="p-5 bg-blue-50/30">
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold shadow-sm border border-blue-200">PB</div>
-                                <span class="text-stone-800 font-semibold text-sm">Nguyễn Phước Bảo</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold shadow-sm border border-blue-200">DK</div>
-                                <span class="text-stone-800 font-semibold text-sm">Nguyễn Duy Khánh</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold shadow-sm border border-blue-200">BN</div>
-                                <span class="text-stone-800 font-semibold text-sm">Nguyễn Đình Bảo Nguyên</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Frontend Card -->
-                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="bg-gradient-to-r from-emerald-500 to-emerald-600 px-5 py-4">
-                        <h4 class="font-bold text-white flex items-center gap-2 text-lg">🎨 Frontend (FE)</h4>
-                    </div>
-                    <div class="p-5 bg-emerald-50/30">
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shadow-sm border border-emerald-200">VS</div>
-                                <span class="text-stone-800 font-semibold text-sm">Nguyễn Văn Sơn</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shadow-sm border border-emerald-200">NT</div>
-                                <span class="text-stone-800 font-semibold text-sm">Nguyễn Nhật Tân</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold shadow-sm border border-emerald-200">NT</div>
-                                <span class="text-stone-800 font-semibold text-sm">Nguyễn Ngọc Tú</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- QC Card -->
-                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="bg-gradient-to-r from-amber-500 to-amber-600 px-5 py-4">
-                        <h4 class="font-bold text-white flex items-center gap-2 text-lg">🕵️ QC / Tester</h4>
-                    </div>
-                    <div class="p-5 bg-amber-50/30">
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-sm border border-amber-200">NH</div>
-                                <span class="text-stone-800 font-semibold text-sm">Lê Ngọc Hà</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="timeline" class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 md:p-8 scroll-mt-20">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-stone-800 mb-2">🗓 Hành Trình Chi Tiết Theo Tuần</h2>
-                <p class="text-stone-600">Khám phá chi tiết công việc của toàn bộ dự án theo từng Sprints. Bấm vào các tuần dưới đây để xem mục tiêu chung và nhiệm vụ cụ thể của Backend, Frontend, và QC đang làm song song trong tuần đó.</p>
-            </div>
-
-            <div class="flex flex-wrap gap-2 mb-8" id="week-selectors">
-            </div>
-
-            <div class="bg-stone-50 rounded-xl p-6 border border-stone-200 fade-in" id="week-content-area">
-                <div class="mb-6 pb-4 border-b border-stone-200">
-                    <h3 class="text-xl font-bold text-emerald-700" id="current-week-title"></h3>
-                    <p class="text-stone-600 mt-2 italic" id="current-week-objective"></p>
-                    <div id="week-alert" class="hidden mt-4 bg-red-50 border-l-4 border-red-500 text-red-800 p-3 rounded shadow-sm font-bold flex items-center gap-2 text-sm"></div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-blue-500">
-                        <h4 class="font-bold text-blue-800 text-lg mb-3 flex items-center gap-2">⚙️ Backend (BE)</h4>
-                        <ul class="space-y-2 text-stone-700 text-sm list-disc pl-4" id="week-be-tasks"></ul>
-                    </div>
-                    
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-emerald-500">
-                        <h4 class="font-bold text-emerald-800 text-lg mb-3 flex items-center gap-2">🎨 Frontend (FE)</h4>
-                        <ul class="space-y-2 text-stone-700 text-sm list-disc pl-4" id="week-fe-tasks"></ul>
-                    </div>
-                    
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-amber-500">
-                        <h4 class="font-bold text-amber-800 text-lg mb-3 flex items-center gap-2">🕵️ QC / Tester</h4>
-                        <ul class="space-y-2 text-stone-700 text-sm list-disc pl-4" id="week-qc-tasks"></ul>
-                    </div>
-                </div>
-                <div id="week-team-tasks-container" class="mt-6 hidden">
-                    <div class="bg-white p-5 rounded-lg shadow-sm border-t-4 border-purple-500">
-                        <h4 class="font-bold text-purple-800 text-lg mb-3 flex items-center gap-2">🤝 Nhiệm vụ chung (Cả Team)</h4>
-                        <ul class="space-y-2 text-stone-700 text-sm list-disc pl-4" id="week-team-tasks"></ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="roles" class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 md:p-8 scroll-mt-20">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-stone-800 mb-2">🎯 Góc Nhìn Theo Vai Trò</h2>
-                <p class="text-stone-600">Bạn là ai trong dự án? Chọn vai trò của mình để lọc ra toàn bộ lộ trình nhiệm vụ và Output cần đạt được trải dài suốt 8 tuần mà không bị phân tâm bởi công việc của bộ phận khác.</p>
-            </div>
-
-            <div class="flex border-b border-stone-200 mb-6">
-                <button class="role-btn active px-6 py-3 text-stone-500 font-medium hover:text-emerald-600 transition-colors" data-role="be">⚙️ Lộ trình Backend</button>
-                <button class="role-btn px-6 py-3 text-stone-500 font-medium hover:text-emerald-600 transition-colors" data-role="fe">🎨 Lộ trình Frontend</button>
-                <button class="role-btn px-6 py-3 text-stone-500 font-medium hover:text-emerald-600 transition-colors" data-role="qc">🕵️ Lộ trình QC</button>
-            </div>
-
-            <div class="space-y-6 fade-in" id="role-timeline-container">
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-stone-800 text-stone-400 py-8 text-center text-sm">
-        <p>Vegetable Shop Webapp Project - Interactive Master Plan</p>
-    </footer>
-
-    <script>
-        const planData = [
-            {
-                week: 1,
-                title: "TÌM HIỂU CÔNG NGHỆ, CÔNG CỤ & QUY TRÌNH (ONBOARDING)",
-                objective: "Mục tiêu: Đảm bảo tất cả thành viên nắm vững công nghệ, setup môi trường và thống nhất quy trình làm việc.",
-                be: [
-                    "Nghiên cứu Git flow, Docker căn bản, RestAPI.",
-                    "Output: Slide báo cáo các thao tác GitHub cơ bản (pull, push, merge, resolve conflict…).",
-                    "Output: Slide báo cáo các thao tác căn bản với Docker, trình bày lợi ích của Docker.",
-                    "Output: Slide báo cáo RestAPI, demo 1 project dùng Swagger/OpenAPI."
-                ],
-                fe: [
-                    "Nghiên cứu cách public local, chọn UI library, mock API.",
-                    "Output: Slide báo cáo và demo Cloudflare Tunnel (public link cho mọi người xem).",
-                    "Output: Slide báo cáo và thống nhất chọn thư viện UI (Tailwind CSS / Element Plus), tạo project demo.",
-                    "Output: Slide báo cáo và demo dùng Prism để dựng Mock Server từ file cấu hình Swagger."
-                ],
-                qc: [
-                    "Nền tảng kiểm thử, STLC, kỹ thuật viết testcase, Postman.",
-                    "Output: Slide báo cáo nguyên tắc, kỹ thuật test và quy trình STLC.",
-                    "Output: Tạo Template chuẩn cho Test Plan, Test Case và Log Bug (trên Excel hoặc Jira).",
-                    "Output: Slide báo cáo thao tác Postman, demo call Public APIs (GET, POST, PUT, DELETE)."
-                ]
-            },
-            {
-                week: 2,
-                title: "THIẾT KẾ DATABASE, API CONTRACT & SETUP BASE PROJECT",
-                objective: "Mục tiêu: Thống nhất cấu trúc dữ liệu, chốt API Contract (Swagger) để FE và BE có thể làm việc độc lập bắt đầu từ tuần sau.",
-                be: [
-                    "Thiết kế Database (ERD) cho toàn bộ hệ thống (Users, Products, Categories, Orders, Cart...).",
-                    "Khởi tạo Base Project Spring Boot, config kết nối MySQL.",
-                    "Quan trọng: Cùng FE và QC viết file openapi.yaml (Swagger) định nghĩa toàn bộ API của dự án. Push lên Github."
-                ],
-                fe: [
-                    "Khởi tạo Base Project VueJS 3 (Composition API, Vite).",
-                    "Thiết kế giao diện tổng thể.",
-                    "Cấu hình các component UI cơ bản (Button, Input, Table, Modal).",
-                    "Setup Vue Router, Pinia (State Management), Axios.",
-                    "Tích hợp UI Library đã chọn ở Tuần 1."
-                ],
-                qc: [
-                    "Review tài liệu thiết kế Database và API (Swagger) xem có đáp ứng đủ Business Requirement (BRD) không. Phát hiện logic sai từ sớm.",
-                    "Lập Test Case cho tổng thể tính năng dự án."
-                ]
-            },
-            {
-                week: 3,
-                title: "MODULE AUTHENTICATION & BẢO MẬT (ĐĂNG NHẬP / ĐĂNG KÝ)",
-                objective: "Mục tiêu: Hoàn thiện tính năng xác thực người dùng và phân quyền cơ bản.",
-                be: [
-                    "Cài đặt Spring Security & JWT (JSON Web Token).",
-                    "Viết API các chức năng: Đăng ký, Đăng nhập, Đăng xuất, Quên mật khẩu, Lấy thông tin User hiện tại.",
-                    "Viết Unit Test cho các service Auth."
-                ],
-                fe: [
-                    "Dựng UI trang Đăng nhập, Đăng ký.",
-                    "Tích hợp gọi API Auth (thật từ BE). Xử lý lưu Token vào LocalStorage/Cookie.",
-                    "Xử lý logic Vue Router: Chặn người dùng chưa đăng nhập không được vào giỏ hàng/thanh toán (Navigation Guards)."
-                ],
-                qc: [
-                    "Lập Test Case cho tổng thể tính năng dự án."
-                ]
-            },
-            {
-                week: 4,
-                title: "MODULE SẢN PHẨM & TRANG CHỦ (CATALOG & HOMEPAGE)",
-                objective: "Mục tiêu: Hiển thị danh sách sản phẩm, phân loại danh mục, tìm kiếm và xem chi tiết.",
-                be: [
-                    "Viết các API GET: Lấy danh sách danh mục, Lấy danh sách sản phẩm (có phân trang/Pagination).",
-                    "Viết API: Tìm kiếm sản phẩm theo tên, Lọc theo giá/danh mục.",
-                    "Viết API: Lấy chi tiết 1 sản phẩm."
-                ],
-                fe: [
-                    "Dựng UI Trang chủ (Banner, Sản phẩm nổi bật).",
-                    "Dựng UI Trang danh sách sản phẩm: Tích hợp thanh Search, bộ Lọc (Filter) và Phân trang.",
-                    "Dựng UI Trang Chi tiết sản phẩm.",
-                    "Tích hợp API thật BE đưa lên."
-                ],
-                qc: [
-                    "Thực hiện test API và UI của Module Đăng ký/ Đăng nhập."
-                ]
-            },
-            {
-                week: 5,
-                title: "MODULE GIỎ HÀNG & THANH TOÁN (CART & CHECKOUT)",
-                objective: "Mục tiêu: Xử lý logic tính tiền, thêm bớt sản phẩm và tạo đơn hàng thành công.",
-                alert: "LƯU Ý QUAN TRỌNG: Cuối tuần này sẽ Báo cáo Offline. Yêu cầu bắt buộc phải thông luồng Đăng ký/Đăng nhập -> Xem sản phẩm -> Thanh toán.",
-                be: [
-                    "Viết API Giỏ hàng: Thêm, Sửa (tăng giảm số lượng), Xóa sản phẩm khỏi giỏ.",
-                    "Viết API Đặt hàng (Checkout): Lưu thông tin người nhận, lưu chi tiết các món hàng trong đơn, trừ số lượng tồn kho (nếu có). Trả về trạng thái 'Đã đặt hàng'.",
-                    "Viết API thanh toán thẻ tính dụng (giả lập với các trạng thái Success/Fail/Pending/Waiting)."
-                ],
-                fe: [
-                    "Dựng UI Giỏ hàng (dạng Drawer trượt ra hoặc trang riêng). Tính tổng tiền realtime.",
-                    "Lưu tạm Giỏ hàng ở Pinia/LocalStorage nếu chưa đăng nhập, đồng bộ lên DB khi đã đăng nhập.",
-                    "Dựng UI trang Thanh toán (Điền form thông tin giao hàng) và gọi API Checkout."
-                ],
-                qc: [
-                    "Thực hiện test API và UI của Module Sản phầm và Trang chủ.",
-                    "Smoke test luồng giỏ hàng và thanh toán.",
-                    "Quản lý tiến độ dự án để kết thúc tuần 5 sẽ offline báo cáo thông luồng Đăng ký/ đăng nhập -> Xem sản phẩm và mua hàng."
-                ]
-            },
-            {
-                week: 6,
-                title: "MODULE QUẢN LÝ ĐƠN HÀNG (USER VIEW) & COUPON",
-                objective: "Mục tiêu: Cho phép người dùng theo dõi lịch sử mua hàng và cập nhật thông tin cá nhân.",
-                be: [
-                    "Viết API: Lấy lịch sử đơn hàng của User đang login, Lấy chi tiết đơn hàng.",
-                    "Viết API: Đánh giá và bình luận sản phẩm sau khi mua hàng.",
-                    "Viết API: Áp dụng mã giảm giá."
-                ],
-                fe: [
-                    "Dựng UI Trang Lịch sử mua hàng: Hiển thị trạng thái đơn. Đánh giá sản phẩm sau khi mua hàng.",
-                    "Tích hợp API mã giảm giá và tính tổng realtime."
-                ],
-                qc: [
-                    "Thực hiện test API và UI của Module Giỏ hàng và thanh toán."
-                ]
-            },
-            {
-                week: 7,
-                title: "MODULE ADMIN DASHBOARD & QUẢN TRỊ",
-                objective: "Mục tiêu: Hoàn thiện công cụ quản trị dành riêng cho nhân viên/quản lý cửa hàng.",
-                be: [
-                    "Viết API dành riêng cho Role ADMIN: Thống kê doanh thu, số đơn hàng.",
-                    "Viết API (CRUD) quản trị: Thêm/Sửa/Xóa Sản phẩm, Xem thông tin đơn hàng, Cập nhật trạng thái Đơn hàng, Quản lý danh mục sản phẩm.",
-                    "Đảm bảo cấu hình Spring Security chặn Role USER không được truy cập API này."
-                ],
-                fe: [
-                    "Dựng Layout Admin riêng biệt (Sử dụng UI Admin đơn giản).",
-                    "Dựng UI Dashboard thống kê (có thể dùng Chart.js/Echarts cơ bản).",
-                    "Dựng UI các bảng (Table) quản lý Sản phẩm, quản lý Đơn hàng. Cho phép Admin bấm chuyển trạng thái đơn."
-                ],
-                qc: [
-                    "Thực hiện test API và UI của Module Quản lý đơn hàng & Coupon."
-                ]
-            },
-            {
-                week: 8,
-                title: "KIỂM THỬ UAT, FIX BUG, TỐI ƯU & BÁO CÁO (CODE FREEZE)",
-                objective: "Mục tiêu: Đóng băng tính năng mới (Code Freeze). Làm sạch hệ thống, tối ưu và chuẩn bị nghiệm thu cuối khóa.",
-                alert: "LƯU Ý QUAN TRỌNG: Tuần này diễn ra buổi DEMO SẢN PHẨM OFFLINE kết thúc chương trình thực tập. Yêu cầu 100% thành viên tham gia và chuẩn bị kỹ lưỡng.",
-                be: [
-                    "KHÔNG code thêm tính năng mới.",
-                    "Fix toàn bộ bug do QC raise trên hệ thống.",
-                    "Clean code, kiểm tra và tối ưu các câu query bị chậm. Đóng gói code vào Docker."
-                ],
-                fe: [
-                    "Fix toàn bộ bug UI/UX, logic từ QC.",
-                    "Rà soát lại Responsive (Mobile, Tablet, PC) cho toàn bộ trang.",
-                    "Thêm hiệu ứng Loading, Toast Notification cho mượt mà. Đóng gói code."
-                ],
-                qc: [
-                    "Test module Admin Dashboard.",
-                    "Chạy Kiểm thử Hồi quy (Regression Test) toàn bộ hệ thống từ đầu đến cuối một lần nữa.",
-                    "Hoàn thiện Test Report, thống kê số lượng Bug (Fixed/Closed/Open)."
-                ],
-                team: [
-                    "Chuẩn bị cho buổi Demo sản phẩm offline kết thúc chương trình thực tập.",
-                    "BE và FE Làm Slide tổng kết báo cáo thực tập (Giới thiệu công nghệ và các tính năng đã làm).",
-                    "QC review lại các phần báo cáo của BE và FE. Phối hợp chạy full luồng trước khi demo."
-                ]
-            }
-        ];
-
-        function renderWeekButtons() {
-            const container = document.getElementById('week-selectors');
-            planData.forEach((week, index) => {
-                const btn = document.createElement('button');
-                btn.className = `tab-btn px-4 py-2 rounded-full border border-stone-300 text-stone-600 font-medium hover:border-emerald-500 hover:text-emerald-600 transition-all ${index === 0 ? 'active' : ''}`;
-                btn.innerText = `Tuần ${week.week}`;
-                btn.onclick = () => selectWeek(index, btn);
-                container.appendChild(btn);
-            });
-        }
-
-        function selectWeek(index, btnElement) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
-
-            const data = planData[index];
-            document.getElementById('current-week-title').innerText = `Tuần ${data.week}: ${data.title}`;
-            document.getElementById('current-week-objective').innerText = data.objective;
-            
-            const alertBox = document.getElementById('week-alert');
-            if (data.alert) {
-                alertBox.innerHTML = `<span>🚨</span> <span>${data.alert}</span>`;
-                alertBox.classList.remove('hidden');
-            } else {
-                alertBox.classList.add('hidden');
-            }
-
-            const renderList = (id, items) => {
-                const ul = document.getElementById(id);
-                ul.innerHTML = '';
-                items.forEach(item => {
-                    const li = document.createElement('li');
-                    li.innerHTML = item.replace('Output:', '<strong>Output:</strong>').replace('Quan trọng:', '<strong class="text-red-600">Quan trọng:</strong>');
-                    ul.appendChild(li);
-                });
-            };
-
-            renderList('week-be-tasks', data.be);
-            renderList('week-fe-tasks', data.fe);
-            renderList('week-qc-tasks', data.qc);
-
-            const teamContainer = document.getElementById('week-team-tasks-container');
-            if (data.team) {
-                teamContainer.classList.remove('hidden');
-                renderList('week-team-tasks', data.team);
-            } else {
-                teamContainer.classList.add('hidden');
-            }
-
-            const contentArea = document.getElementById('week-content-area');
-            contentArea.classList.remove('fade-in');
-            void contentArea.offsetWidth; 
-            contentArea.classList.add('fade-in');
-        }
-
-        function renderRoleTimeline(role) {
-            const container = document.getElementById('role-timeline-container');
-            container.innerHTML = '';
-
-            let borderClass, titlePrefix;
-            if(role === 'be') { borderClass = 'border-blue-200'; titlePrefix = '⚙️ Backend'; }
-            if(role === 'fe') { borderClass = 'border-emerald-200'; titlePrefix = '🎨 Frontend'; }
-            if(role === 'qc') { borderClass = 'border-amber-200'; titlePrefix = '🕵️ QC / Tester'; }
-
-            planData.forEach(week => {
-                const tasks = week[role];
-                if (!tasks || tasks.length === 0) return;
-
-                const block = document.createElement('div');
-                block.className = `bg-stone-50 rounded-lg p-5 border-l-4 ${borderClass.replace('200', '500')} shadow-sm`;
-                
-                let taskHtml = tasks.map(t => `<li class="mb-1">${t.replace('Output:', '<strong>Output:</strong>').replace('Quan trọng:', '<strong class="text-red-600">Quan trọng:</strong>')}</li>`).join('');
-                
-                let alertHtml = '';
-                if (week.alert) {
-                    alertHtml = `<div class="mt-2 mb-3 p-3 bg-red-50 border border-red-200 text-red-700 rounded text-sm font-semibold flex items-start gap-2"><span>🚨</span><span>${week.alert}</span></div>`;
-                }
-
-                block.innerHTML = `
-                    <div class="flex items-center justify-between mb-3">
-                        <h4 class="font-bold text-stone-800 text-lg">Tuần ${week.week}: <span class="text-stone-600 text-base font-normal">${week.title}</span></h4>
-                    </div>
-                    ${alertHtml}
-                    <ul class="list-disc pl-5 text-stone-700 text-sm">
-                        ${taskHtml}
-                    </ul>
-                `;
-                container.appendChild(block);
-            });
-        }
-
-        document.querySelectorAll('.role-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                const container = document.getElementById('role-timeline-container');
-                container.classList.remove('fade-in');
-                void container.offsetWidth; 
-                container.classList.add('fade-in');
-
-                renderRoleTimeline(this.dataset.role);
-            });
-        });
-
-        window.onload = () => {
-            renderWeekButtons();
-            
-            if(document.querySelector('.tab-btn')) {
-                selectWeek(0, document.querySelector('.tab-btn'));
-            }
-            
-            renderRoleTimeline('be');
-        };
-    </script>
 </body>
 </html>
